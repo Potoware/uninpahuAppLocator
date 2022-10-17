@@ -1,0 +1,31 @@
+<nav id="navbar" class="navbar navbar-expand-md navbar-dark w-100 position-fixed" style="background-color: #EE7F00;">
+  <div class="container-fluid">
+  	<a class="navbar-brand" th:href="@{/locator/admin/}">
+      <img th:src="@{/images/logouninpahu.png}" alt="Logo"  height="24" class="d-inline-block align-text-top">
+    </a>
+    <button class="navbar-toggler" type="button"  data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" th:if="${session.usuarioSesion!=null}">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/locator/admin/salones/}">Salones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/locator/admin/sedes/}">Sedes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/locator/admin/usuarios/}">Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/locator/}">Locator</a>
+        </li>
+      </ul>
+     
+      <div class="position-absolute top-50 end-0 translate-middle-y">
+      	<a class="btn btn-outline-light" th:href="@{/usuario/login/}">Cerrar Sesión</a>
+      </div>
+    </div>
+      
+  </div>
+</nav>

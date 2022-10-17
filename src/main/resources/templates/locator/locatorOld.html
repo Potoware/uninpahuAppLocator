@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Classroom Locator UNINPAHU</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <!-- Simple line icons-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link th:href="@{/styles/cssandjs/stylesLocator.css}" rel="stylesheet" />
+        <style>
+        #map {height: 100%;}html, body {height: 100%;margin: 0;padding: 0;}
+        #street {height: 100%;}html, body {height: 100%;margin: 0;padding: 0;}
+        </style>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+        <nav id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"><a href="#page-top">Menu de opciones</a></li>
+                <li class="sidebar-nav-item"><a href="#page-top">Home</a></li>
+                <li class="sidebar-nav-item"><a href="#buscar">Ingresa el aula a buscar</a></li>
+                <li class="sidebar-nav-item"><a href="#ubicar">Visualiza el mapa</a></li>
+                <li class="sidebar-nav-item"><a href="#services">Street View</a></li>
+            </ul>
+        </nav>
+        <!-- Home-->
+        <header class="masthead d-flex align-items-center">
+            <div class="container px-4 px-lg-5 text-center">
+                <h1 class="mb-1">UNINPAHU</h1>
+                <h3 class="mb-5"><em>Classroom Locator</em></h3>
+                <a class="btn btn-primary btn-xl" href="#buscar">Localiza Tu Salón</a>
+            </div>
+        </header>
+        <!-- buscar-->
+        <section class="content-section bg-light" id="buscar">
+            <div class="container px-4 px-lg-5 text-center">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-10">
+                        <h2>Ingresa el aula a buscar</h2>
+                        <p class="lead mb-5">
+                            En este apartado debes ingresar el numero de sede y el aula, por ejemplo "1-102" sin comillas 
+                        </p>
+                        <br>
+                        <form action="buscar.php" method="post">   
+                        Ingresa el salon a buscar: <input type="text" name="salon" size="45" class="lead mb-5">
+                        <p><input type="submit" value = "Buscar" class="btn btn-dark btn-xl"></p> 
+                        </form>
+                        <table border=1>
+                            <tr>
+                                <td>id</td>
+                                <td>salon</td>
+                                <td>lat</td>
+                                <td>lon</td>
+                            </tr>    
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ubicar-->
+        <section>
+        <div id ="ubicar">
+        <iframe width="100%" height="500px" frameborder="0" allowfullscreen src="//umap.openstreetmap.fr/es/map/uninpahu_816733?scaleControl=true&miniMap=true&scrollWheelZoom=true&zoomControl=true&allowEdit=false&moreControl=false&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=databrowser&captionBar=false&datalayers=2437078#19/4.501165305137219/-74.08589810947966"></iframe><p><a href="//umap.openstreetmap.fr/es/map/uninpahu_816733">Ver pantalla completa</a></p> 
+        </div>
+        </section>
+        <!-- services-->
+        <section class="content-section bg-light" id="services">
+            <div class="container px-4 px-lg-5 text-center">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-10">  
+                        <div id ="street">    
+                            <iframe src="https://www.google.com/maps/embed?pb=!4v1664142834109!6m8!1m7!1s03SoW0iGWrAh17KuJ5lrgQ!2m2!1d4.629214911086693!2d-74.06999598121321!3f114.05142295805518!4f0!5f0.7820865974627469" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </section>       
+        <!-- Footer-->
+        <footer class="footer text-center">
+            <div class="container px-4 px-lg-5">
+                <ul class="list-inline mb-5">
+                    <li class="list-inline-item">
+                        <a class="social-link rounded-circle text-white mr-3" href="https://es-la.facebook.com/UninpahuOficial/"><i class="icon-social-facebook"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="social-link rounded-circle text-white mr-3" href="https://twitter.com/UNINPAHU?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><i class="icon-social-twitter"></i></a>
+                    </li>
+                </ul>
+                <p class="text-muted small mb-0">Copyright &copy; Uninpahu 2022</p>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script type="text/javascript" th:src="@{/js/cssandjs/script.js}"></script>
+    </body>
+</html>

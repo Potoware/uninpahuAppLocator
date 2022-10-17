@@ -35,13 +35,15 @@ public class Usuario implements Serializable{
 	private String apellido;
 	
 	@NotEmpty(message = "no puede estar vacio")
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String usuario;
 	
 	@NotEmpty(message = "no puede estar vacio")
 	@Column(nullable = false)
 	@Size(min = 8,message = "debe tener entre 8 y 32 caracteres")
 	private String contrasenia;
+	
+	private boolean estado;
 
 	public Long getId() {
 		return id;
@@ -82,5 +84,15 @@ public class Usuario implements Serializable{
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+	
+	
 
 }
