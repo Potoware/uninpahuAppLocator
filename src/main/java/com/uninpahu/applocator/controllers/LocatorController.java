@@ -284,6 +284,8 @@ public class LocatorController extends Base{
 		mensaje.setTipo(salon.getIdSalon().equals(999L)?"personalizadoRuta":"personalizado");
 		model.addAttribute("mensaje",mensaje);
 		
+		List<Salon> salones = salonService.findAll();
+		model.addAttribute("salones", salones);
 		
 		return "locator/locator";
 	}
