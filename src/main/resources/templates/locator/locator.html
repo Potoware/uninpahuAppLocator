@@ -33,7 +33,7 @@ function navAction(){
 		  <div class="p-2">• buscar indicaciones (experimental), por ejemplo <b>Como llegar desde el parqueadero a la sede 1</b></div>
 
 		  <div class="p-2">
-		   <input class="form-control text-center form-control-lg" list="datalistOptions" th:field="*{criterio}" placeholder="escriba para buscar...">
+		   <input class="form-control text-center form-control-lg" autocomplete="off" list="datalistOptions" th:field="*{criterio}" placeholder="escriba para buscar...">
 		<datalist id="datalistOptions">
 		  <option th:each="sln: ${salones}" th:value="${sln.sede.numero} +'-'+ ${sln.numero}" th:text="${sln.sede.numero} +'-'+ ${sln.numero}"></option>
 		  <option value="999" text="Como llegar desde el parqueadero a la sede 1"></option>
