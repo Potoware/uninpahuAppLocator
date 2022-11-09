@@ -1,20 +1,29 @@
 package com.uninpahu.applocator.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.uninpahu.applocator.models.entity.Sede;
@@ -302,5 +311,59 @@ public class LocatorController extends Base{
 		}
 		return  url.split("\"")[1];
 	}
+	@CrossOrigin(origins = "*")
+	@PostMapping("/api/ajax/search")
+	public ResponseEntity<HashMap> buscarSalon(@RequestParam("arr") String criterio) {
+		HashMap<String, Object> response = new HashMap<String, Object>();
+		Salon salon = new Salon();
 	
+		if(criterio!=null && criterio.contains("-")) {
+			salon = salonService.findByNumeroSedeNumero(criterio.split("-")[1],criterio.split("-")[0]);
+		}
+		
+		if(salon == null ||salon.getIdSalon()==null) {
+			response.put("encontrado",false);
+		}else {
+			response.put("encontrado",true);
+		}
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("locator/{parametro}")
+    public String paginaComun(
+            @PathVariable("parametro") String parametro,
+            Model model,
+            RedirectAttributes redirectAttrs) {
+
+		Mensaje mensaje= new Mensaje();
+		Salon salon = new Salon();
+		System.out.println(parametro);
+		if(parametro!=null && parametro.contains("-")) {
+			salon = salonService.findByNumeroSedeNumero(parametro.split("-")[1],parametro.split("-")[0]);
+			if(salon == null) {
+				salon = new Salon();
+			}
+		}else {
+			mostrarMensajeError("Has ingresado un formato invalido de texto", redirectAttrs);
+			return "redirect:locator/";
+		}
+			
+		
+		if(salon.getIdSalon()==null) {
+			mostrarMensajeError("No se encontro el salon", redirectAttrs);
+			model.addAttribute("salon",salon);
+			return "redirect:locator";
+		}else {
+			salon.setCoordenadas(salon.getCoordenadas().replaceAll("/", ","));
+		}
+		model.addAttribute("salon",salon);
+		mensaje.setMensaje("Se encontro el salon");
+		mensaje.setTipo(salon.getIdSalon().equals(999L)?"personalizadoRuta":"personalizado");
+		model.addAttribute("mensaje",mensaje);
+		
+		List<Salon> salones = salonService.findAll();
+		model.addAttribute("salones", salones);
+		
+		return "locator/locator";
+    }
 }
