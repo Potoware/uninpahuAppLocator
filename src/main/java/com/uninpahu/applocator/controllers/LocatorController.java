@@ -316,15 +316,19 @@ public class LocatorController extends Base{
 	public ResponseEntity<HashMap> buscarSalon(@RequestParam("arr") String criterio) {
 		HashMap<String, Object> response = new HashMap<String, Object>();
 		Salon salon = new Salon();
-	
+
 		if(criterio!=null && criterio.contains("-")) {
 			salon = salonService.findByNumeroSedeNumero(criterio.split("-")[1],criterio.split("-")[0]);
+		}else {
+			List<Salon> salones=salonService.findAll();
+			salon = salones.get((int)(Math.random()*salones.size()));
 		}
 		
 		if(salon == null ||salon.getIdSalon()==null) {
 			response.put("encontrado",false);
 		}else {
 			response.put("encontrado",true);
+			response.put("salon", salon.getSede().getNumero()+"-"+salon.getNumero());
 		}
 		return ResponseEntity.ok(response);
 	}
